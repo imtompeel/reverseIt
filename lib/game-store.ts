@@ -187,14 +187,15 @@ export function setOriginalAudio(
 export function setMimicAudio(
   gameId: string,
   playerId: string,
-  audio: string
+  audio: string,
+  reversedAudio: string
 ): { error?: string } {
   const game = getGame(gameId);
   if (!game?.round) return { error: "Invalid game state" };
   if (game.phase !== "recording_mimic") return { error: "Not the right phase" };
   if (currentMimicId(game.round) !== playerId) return { error: "Not your turn" };
 
-  game.round.mimics.push({ playerId, audio });
+  game.round.mimics.push({ playerId, audio, reversedAudio });
   game.round.mimicQueue.shift();
 
   if (game.round.mimicQueue.length > 0) {

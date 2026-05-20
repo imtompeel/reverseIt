@@ -66,9 +66,16 @@ export function initSocketServer(httpServer: HttpServer) {
       }
     );
 
-    socket.on("submit_mimic", ({ audio }: { audio: string }) => {
+    socket.on(
+      "submit_mimic",
+      ({ audio, reversedAudio }: { audio: string; reversedAudio: string }) => {
       if (!currentGameId || !currentPlayerId) return;
-      const result = store.setMimicAudio(currentGameId, currentPlayerId, audio);
+      const result = store.setMimicAudio(
+        currentGameId,
+        currentPlayerId,
+        audio,
+        reversedAudio
+      );
       if (result.error) {
         socket.emit("error", { message: result.error });
         return;
@@ -146,6 +153,7 @@ function toClientRound(game: GameState): ClientRoundState | null {
         playerId: m.playerId,
         playerName: playerName(game, m.playerId),
         audio: m.audio,
+        reversedAudio: m.reversedAudio,
       })),
     };
   }

@@ -17,6 +17,7 @@ export interface Player {
 export interface MimicAttempt {
   playerId: string;
   audio: string;
+  reversedAudio: string;
 }
 
 export interface RoundState {
@@ -46,6 +47,7 @@ export interface ClientMimicAttempt {
   playerId: string;
   playerName: string;
   audio: string;
+  reversedAudio: string;
 }
 
 export interface ClientRoundState {

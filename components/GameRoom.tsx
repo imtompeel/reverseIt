@@ -68,7 +68,8 @@ export function GameRoom({ gameState, connected, emit }: GameRoomProps) {
       setSubmitting(true);
       try {
         const audio = await blobToDataUrl(blob);
-        emit("submit_mimic", { audio });
+        const reversedAudio = await reverseAudioBlob(blob);
+        emit("submit_mimic", { audio, reversedAudio });
       } finally {
         setSubmitting(false);
       }
@@ -248,7 +249,11 @@ export function GameRoom({ gameState, connected, emit }: GameRoomProps) {
           <div className="reveal-grid">
             {round.mimics?.map((m) => (
               <div key={m.playerId} className="reveal-item">
-                <div className="reveal-label">{m.playerName}&apos;s mimic</div>
+                <div className="reveal-label">{m.playerName} — reversed</div>
+                <AudioPlayer src={m.reversedAudio} />
+                <div className="reveal-label" style={{ marginTop: "0.75rem" }}>
+                  {m.playerName} — forwards
+                </div>
                 <AudioPlayer src={m.audio} />
               </div>
             ))}
@@ -358,7 +363,7 @@ function LobbyView({
         <ol style={{ marginTop: "0.5rem", paddingLeft: "1.25rem" }}>
           <li>One speaker records a phrase</li>
           <li>Everyone else takes a turn mimicking it backwards</li>
-          <li>Reveal shows every mimic attempt side by side</li>
+          <li>Reveal plays every mimic forwards and backwards</li>
         </ol>
       </div>
 
