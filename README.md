@@ -36,13 +36,27 @@ Open [http://localhost:3000](http://localhost:3000) on the host device. Other pl
 - Web Audio API for reversing recordings
 - QR codes via [`qrcode`](https://www.npmjs.com/package/qrcode)
 
-## Deploy
+## Deploy on Render
 
-Build and run the custom Node server (Socket.io requires it):
+This app needs a **Web Service** (not a static site) because multiplayer uses Socket.io.
+
+1. In [Render](https://render.com): **New → Web Service** → connect **imtompeel/reverseIt**.
+2. Confirm settings (or use the repo’s `render.yaml`):
+   - **Build command:** `npm install && npm run build`
+   - **Start command:** `npm start`
+   - **Plan:** Free (optional; paid avoids cold starts)
+3. Click **Create Web Service** and wait for the first deploy to finish.
+4. Open your service URL (e.g. `https://reverseit.onrender.com`). Share that link for multiplayer QR codes.
+
+Render sets `PORT` automatically. HTTPS is included (required for microphone access on phones).
+
+**Note:** Free instances sleep after inactivity; the first visit after sleep can take ~30–60 seconds. Game state is in memory and resets on redeploy or restart.
+
+## Run production locally
 
 ```bash
 npm run build
 npm start
 ```
 
-Set `PORT` and `HOSTNAME` as needed. Game state is stored in memory — restarting the server clears active games. For production at scale, consider Redis or another shared store.
+Set `PORT` and `HOSTNAME` as needed.
