@@ -148,11 +148,9 @@ function toClientRound(game: GameState): ClientRoundState | null {
       ...base,
       originalPhrase: round.originalPhrase,
       originalAudio: round.originalAudio,
-      reversedAudio: round.reversedAudio,
       mimics: round.mimics.map((m) => ({
         playerId: m.playerId,
         playerName: playerName(game, m.playerId),
-        audio: m.audio,
         reversedAudio: m.reversedAudio,
       })),
     };

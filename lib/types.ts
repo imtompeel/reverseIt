@@ -46,7 +46,6 @@ export interface GameState {
 export interface ClientMimicAttempt {
   playerId: string;
   playerName: string;
-  audio: string;
   reversedAudio: string;
 }
 

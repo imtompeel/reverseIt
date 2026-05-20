@@ -240,21 +240,11 @@ export function GameRoom({ gameState, connected, emit }: GameRoomProps) {
               <AudioPlayer src={round.originalAudio} />
             </div>
           )}
-          {round.reversedAudio && (
-            <div className="reveal-item" style={{ marginBottom: "1rem" }}>
-              <div className="reveal-label">Reversed (what mimics heard)</div>
-              <AudioPlayer src={round.reversedAudio} />
-            </div>
-          )}
           <div className="reveal-grid">
             {round.mimics?.map((m) => (
               <div key={m.playerId} className="reveal-item">
-                <div className="reveal-label">{m.playerName} — reversed</div>
+                <div className="reveal-label">{m.playerName}&apos;s mimic (reversed)</div>
                 <AudioPlayer src={m.reversedAudio} />
-                <div className="reveal-label" style={{ marginTop: "0.75rem" }}>
-                  {m.playerName} — forwards
-                </div>
-                <AudioPlayer src={m.audio} />
               </div>
             ))}
           </div>
@@ -363,7 +353,7 @@ function LobbyView({
         <ol style={{ marginTop: "0.5rem", paddingLeft: "1.25rem" }}>
           <li>One speaker records a phrase</li>
           <li>Everyone else takes a turn mimicking it backwards</li>
-          <li>Reveal plays every mimic forwards and backwards</li>
+          <li>Reveal plays the original and each mimic reversed</li>
         </ol>
       </div>
 

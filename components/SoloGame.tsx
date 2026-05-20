@@ -232,8 +232,7 @@ export function SoloGame() {
         <div className="card">
           <h2 className="phase-title">Step 3 — Reveal</h2>
           <p className="phase-desc">
-            Here’s the reversed mimic, then everything else — including your original
-            recording.
+            Hear your original recording and your mimic played backwards.
           </p>
 
           {round.phrase && (
@@ -255,28 +254,16 @@ export function SoloGame() {
           )}
 
           <div className="reveal-grid">
-            {round.mimicReversedAudio && (
-              <div className="reveal-item">
-                <div className="reveal-label">Reversed mimic</div>
-                <AudioPlayer src={round.mimicReversedAudio} />
-              </div>
-            )}
             {round.originalAudio && (
               <div className="reveal-item">
                 <div className="reveal-label">Original recording</div>
                 <AudioPlayer src={round.originalAudio} />
               </div>
             )}
-            {round.reversedAudio && (
+            {round.mimicReversedAudio && (
               <div className="reveal-item">
-                <div className="reveal-label">Reversed (what you mimicked)</div>
-                <AudioPlayer src={round.reversedAudio} />
-              </div>
-            )}
-            {round.mimicAudio && (
-              <div className="reveal-item">
-                <div className="reveal-label">Your mimic (forwards)</div>
-                <AudioPlayer src={round.mimicAudio} />
+                <div className="reveal-label">Your mimic (reversed)</div>
+                <AudioPlayer src={round.mimicReversedAudio} />
               </div>
             )}
           </div>
